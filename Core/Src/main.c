@@ -2,7 +2,7 @@
 /**
   ******************************************************************************
   * @file           : main.c
-  * @brief          : Main program body (corrected)
+  * @brief          : Main program body
   ******************************************************************************
   * @attention
   *
@@ -17,48 +17,43 @@
 #include "i2c.h"
 #include "usart.h"
 #include "gpio.h"
-
+#include "tim.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <string.h>
 #include <stdio.h>
-#include "hts221_reg.h" // driver capteur temperature & humidity
-#include "lps22hh_reg.h" // driver capteur pression
-#include <stdbool.h> // pour utiliser bool
+#include "hts221_reg.h" // header for hts221
+#include "lps22hh_reg.h"  // header for lps22hh
+#include <stdbool.h>
 /* USER CODE END Includes */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-/* NUCLEO_F401RE: Define communication interface */
 #define SENSOR_BUS hi2c1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-#define BOOT_TIME        5 // ms
-#define TX_BUF_DIM       1000
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 
-/* HTS221 (humidity & temperature) */
+static stmdev_ctx_t dev_ctx_hts;
+static stmdev_ctx_t dev_ctx_lps;
+
 static int16_t data_raw_humidity_hts;
 static int16_t data_raw_temperature_hts;
-static float_t humidity_perc;
-static float_t temperature_degC_hts;
-static uint8_t whoamI_hts;
-
-/* LPS22HH (pressure & temperature) */
 static uint32_t data_raw_pressure_lps;
-static int16_t data_raw_temperature_lps;
-static float_t pressure_hPa;
-static float_t temperature_degC_lps;
-static uint8_t whoamI_lps;
-static uint8_t rst_lps;
 
-/* common */
-static uint8_t tx_buffer[TX_BUF_DIM];
+volatile uint8_t Flag_Tim6 = 0;
+float humidity, temperature, pressure;
+
+typedef struct {
+    float x0, y0;
+    float x1, y1;
+} lin_t;
+static lin_t lin_hum, lin_temp;
 
 /* USER CODE END PV */
 
@@ -70,33 +65,19 @@ void SystemClock_Config(void);
 #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 #else
 #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
-#endif /* __GNUC__ */
+#endif
 
-/* platform wrappers prototypes */
+void LireCapteursTemp_Hum(float *hum_hts, float *temp_hts);
+void LireCapteurPression(float *press_lps);
+
+float_t linear_interpolation(lin_t *lin, int16_t x);
+
 static int32_t platform_write_hts(void *handle, uint8_t reg, const uint8_t *bufp, uint16_t len);
 static int32_t platform_read_hts(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len);
 static int32_t platform_write_lps(void *handle, uint8_t reg, const uint8_t *bufp, uint16_t len);
 static int32_t platform_read_lps(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len);
-static void platform_delay(uint32_t ms);
 
 /* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-typedef struct {
-  float_t x0;
-  float_t y0;
-  float_t x1;
-  float_t y1;
-} lin_t;
-
-float_t linear_interpolation(lin_t *lin, int16_t x)
-{
-  return ((lin->y1 - lin->y0) * x + ((lin->x1 * lin->y0) -
-                                     (lin->x0 * lin->y1)))
-         / (lin->x1 - lin->x0);
-}
-/* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
@@ -104,145 +85,70 @@ float_t linear_interpolation(lin_t *lin, int16_t x)
   */
 int main(void)
 {
+    HAL_Init();
+    SystemClock_Config();
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+    MX_GPIO_Init();
+    MX_I2C1_Init();
+    MX_USART1_UART_Init();
+    MX_TIM6_Init();
 
-  /* Configure the system clock */
-  SystemClock_Config();
+    /* ===== HTS221 init ===== */
+    dev_ctx_hts.write_reg = platform_write_hts;
+    dev_ctx_hts.read_reg  = platform_read_hts;
+    dev_ctx_hts.handle    = &SENSOR_BUS;
+    dev_ctx_hts.mdelay    = NULL;
 
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_I2C1_Init();
-  MX_USART1_UART_Init();
+    uint8_t whoamI_hts;
+    hts221_device_id_get(&dev_ctx_hts, &whoamI_hts);
+    if (whoamI_hts != HTS221_ID) while(1);
 
-  /* USER CODE BEGIN 2 */
-  /* ================================ HTS221 init ============================ */
-  stmdev_ctx_t dev_ctx_hts;
-  dev_ctx_hts.write_reg = platform_write_hts;
-  dev_ctx_hts.read_reg  = platform_read_hts;
-  dev_ctx_hts.mdelay    = platform_delay;
-  dev_ctx_hts.handle    = &SENSOR_BUS;
+    // Lire calibration
+    hts221_hum_adc_point_0_get(&dev_ctx_hts, &lin_hum.x0);
+    hts221_hum_rh_point_0_get(&dev_ctx_hts, &lin_hum.y0);
+    hts221_hum_adc_point_1_get(&dev_ctx_hts, &lin_hum.x1);
+    hts221_hum_rh_point_1_get(&dev_ctx_hts, &lin_hum.y1);
 
-  /* Check device ID */
-  whoamI_hts = 0;
-  hts221_device_id_get(&dev_ctx_hts, &whoamI_hts);
-  if (whoamI_hts != HTS221_ID) {
-    /* manage here device not found */
-    while (1) { HAL_Delay(1000); }
-  }
+    hts221_temp_adc_point_0_get(&dev_ctx_hts, &lin_temp.x0);
+    hts221_temp_deg_point_0_get(&dev_ctx_hts, &lin_temp.y0);
+    hts221_temp_adc_point_1_get(&dev_ctx_hts, &lin_temp.x1);
+    hts221_temp_deg_point_1_get(&dev_ctx_hts, &lin_temp.y1);
 
-  /* Read humidity calibration coefficient */
-  lin_t lin_hum;
-  hts221_hum_adc_point_0_get(&dev_ctx_hts, (uint8_t *)&lin_hum.x0);
-  hts221_hum_rh_point_0_get(&dev_ctx_hts, (uint8_t *)&lin_hum.y0);
-  hts221_hum_adc_point_1_get(&dev_ctx_hts, (uint8_t *)&lin_hum.x1);
-  hts221_hum_rh_point_1_get(&dev_ctx_hts, (uint8_t *)&lin_hum.y1);
+    // Activer capteur - PAS DE CONFIGURATION ODR
+    hts221_ctrl_reg1_t ctrl_reg1_hts;
+    ctrl_reg1_hts.pd = PROPERTY_ENABLE;  // Power ON seulement
+    ctrl_reg1_hts.bdu = PROPERTY_ENABLE; // Block data update
+    hts221_write_reg(&dev_ctx_hts, HTS221_CTRL_REG1, (uint8_t*)&ctrl_reg1_hts, 1);
 
-  /* Read temperature calibration coefficient */
-  lin_t lin_temp;
-  hts221_temp_adc_point_0_get(&dev_ctx_hts, (uint8_t *)&lin_temp.x0);
-  hts221_temp_deg_point_0_get(&dev_ctx_hts, (uint8_t *)&lin_temp.y0);
-  hts221_temp_adc_point_1_get(&dev_ctx_hts, (uint8_t *)&lin_temp.x1);
-  hts221_temp_deg_point_1_get(&dev_ctx_hts, (uint8_t *)&lin_temp.y1);
+    /* ===== LPS22HH init ===== */
+    dev_ctx_lps.write_reg = platform_write_lps;
+    dev_ctx_lps.read_reg  = platform_read_lps;
+    dev_ctx_lps.handle    = &SENSOR_BUS;
+    dev_ctx_lps.mdelay    = NULL;
 
-  /* Enable Block Data Update */
-  hts221_block_data_update_set(&dev_ctx_hts, PROPERTY_ENABLE);
+    uint8_t whoamI_lps;
+    lps22hh_device_id_get(&dev_ctx_lps, &whoamI_lps);
+    if (whoamI_lps != LPS22HH_ID) while(1);
 
-  /* Set Output Data Rate */
-  hts221_data_rate_set(&dev_ctx_hts, HTS221_ODR_1Hz);
+    // Activer capteur - PAS DE CONFIGURATION ODR
+    lps22hh_ctrl_reg1_t ctrl_reg1_lps;
+    ctrl_reg1_lps.bdu = 1;  // Block data update seulement
+    lps22hh_write_reg(&dev_ctx_lps, LPS22HH_CTRL_REG1, (uint8_t*)&ctrl_reg1_lps, 1);
 
-  /* Device power on */
-  hts221_power_on_set(&dev_ctx_hts, PROPERTY_ENABLE);
+    /* Start TIM6 interrupt */
+    HAL_TIM_Base_Start_IT(&htim6);
 
-  /* ================================ LPS22HH init =========================== */
-  stmdev_ctx_t dev_ctx_lps;
-  dev_ctx_lps.write_reg = platform_write_lps;
-  dev_ctx_lps.read_reg  = platform_read_lps;
-  dev_ctx_lps.mdelay    = platform_delay;
-  dev_ctx_lps.handle    = &SENSOR_BUS;
-
-  /* Wait sensor boot time */
-  platform_delay(BOOT_TIME);
-
-  /* Check device ID */
-  whoamI_lps = 0;
-  lps22hh_device_id_get(&dev_ctx_lps, &whoamI_lps);
-  if (whoamI_lps != LPS22HH_ID) {
-    /* manage here device not found */
-    while (1) { HAL_Delay(1000); }
-  }
-
-  /* Restore default configuration */
-  lps22hh_reset_set(&dev_ctx_lps, PROPERTY_ENABLE);
-
-  do {
-    lps22hh_reset_get(&dev_ctx_lps, &rst_lps);
-  } while (rst_lps);
-
-  /* Enable Block Data Update */
-  lps22hh_block_data_update_set(&dev_ctx_lps, PROPERTY_ENABLE);
-
-  /* Set Output Data Rate */
-  lps22hh_data_rate_set(&dev_ctx_lps, LPS22HH_1_Hz);
-
-  /* USER CODE END 2 */
-
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-	      static bool got_temp_hts = false;
-	      static bool got_hum_hts  = false;
-	      static bool got_pres_lps = false;
-
-	      /* HTS221: check status and read humidity & temperature when available */
-	      hts221_status_reg_t status1;
-	      hts221_status_get(&dev_ctx_hts, &status1);
-
-	      if (status1.h_da) {
-	          hts221_humidity_raw_get(&dev_ctx_hts, &data_raw_humidity_hts);
-	          humidity_perc = linear_interpolation(&lin_hum, data_raw_humidity_hts);
-	          if (humidity_perc < 0) humidity_perc = 0;
-	          if (humidity_perc > 100) humidity_perc = 100;
-	          got_hum_hts = true;
-	      }
-
-	      if (status1.t_da) {
-	          hts221_temperature_raw_get(&dev_ctx_hts, &data_raw_temperature_hts);
-	          temperature_degC_hts = linear_interpolation(&lin_temp, data_raw_temperature_hts);
-	          got_temp_hts = true;
-	      }
-
-	      /* LPS22HH: read status register and then pressure when available */
-	      lps22hh_status_t status2;
-	      lps22hh_read_reg(&dev_ctx_lps, LPS22HH_STATUS, (uint8_t *)&status2, 1);
-
-	      if (status2.p_da) {
-	          lps22hh_pressure_raw_get(&dev_ctx_lps, &data_raw_pressure_lps);
-	          pressure_hPa = lps22hh_from_lsb_to_hpa(data_raw_pressure_lps);
-	          got_pres_lps = true;
-	      }
-
-	      /* ===== Quand on a les 3 valeurs, on affiche une seule ligne ===== */
-	      if (got_temp_hts && got_hum_hts && got_pres_lps)
-	      {
-	          printf("Temperature(°C)\t\tHumidity(%%)\t\tPressure(hPa)\r\n");
-	          printf("%6.2f\t\t\t%8.2f\t\t%10.2f\r\n",
-	                 temperature_degC_hts,
-	                 humidity_perc,
-	                 pressure_hPa);
-
-	          /* reset pour la prochaine ligne */
-	          got_temp_hts = got_hum_hts = got_pres_lps = false;
-	      }
-
-	      platform_delay(20); // moins de spam, affichage fluide
-  }/* USER CODE END WHILE */
-
-  /* USER CODE BEGIN 3 */
-  /* never reached */
-  /* USER CODE END 3 */
+    /* Infinite loop */
+    while (1)
+    {
+        if (Flag_Tim6)
+        {
+            LireCapteursTemp_Hum(&humidity, &temperature);
+            LireCapteurPression(&pressure);
+            printf("T: %.2f°C | H: %.2f%% | P: %.2fhPa\r\n", temperature, humidity, pressure);
+            Flag_Tim6 = 0;
+        }
+    }
 }
 
 /**
@@ -290,9 +196,71 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
+
+//====================LireCapteursTemp_Hum================//
+void LireCapteursTemp_Hum(float *hum_hts, float *temp_hts)
+{
+    hts221_status_reg_t status;
+
+    // Lancer mesure one-shot
+    uint8_t ctrl = 0;
+    hts221_read_reg(&dev_ctx_hts, HTS221_CTRL_REG2, &ctrl, 1);
+    ctrl |= 0x01; // One-shot
+    hts221_write_reg(&dev_ctx_hts, HTS221_CTRL_REG2, &ctrl, 1);
+
+    // Vérifier si données disponibles
+    hts221_status_get(&dev_ctx_hts, &status);
+
+    if (status.h_da)
+    {
+        hts221_humidity_raw_get(&dev_ctx_hts, &data_raw_humidity_hts);
+        *hum_hts = linear_interpolation(&lin_hum, data_raw_humidity_hts);
+    }
+    else
+    {
+        *hum_hts = 0.0f;
+    }
+
+    if (status.t_da)
+    {
+        hts221_temperature_raw_get(&dev_ctx_hts, &data_raw_temperature_hts);
+        *temp_hts = linear_interpolation(&lin_temp, data_raw_temperature_hts);
+    }
+    else
+    {
+        *temp_hts = 0.0f;
+    }
+}
+
+//====================LireCapteurPression================//
+void LireCapteurPression(float *press_lps)
+{
+    lps22hh_status_t status;
+
+    lps22hh_read_reg(&dev_ctx_lps, LPS22HH_STATUS, (uint8_t *)&status, 1);
+
+    if (status.p_da)
+    {
+        lps22hh_pressure_raw_get(&dev_ctx_lps, &data_raw_pressure_lps);
+        *press_lps = lps22hh_from_lsb_to_hpa(data_raw_pressure_lps);
+    }
+}
+
+/**
+  * @brief Interpolation linéaire pour la calibration
+  */
+float_t linear_interpolation(lin_t *lin, int16_t x)
+{
+  return ((lin->y1 - lin->y0) * x + ((lin->x1 * lin->y0) -
+                                     (lin->x0 * lin->y1)))
+         / (lin->x1 - lin->x0);
+}
+
+/**
+  * @brief Fonction printf redirigée vers UART
+  */
 PUTCHAR_PROTOTYPE
 {
-  /* write a character to the USART1 and wait until transmitted */
   uint8_t c = (uint8_t)ch;
   HAL_UART_Transmit(&huart1, &c, 1, HAL_MAX_DELAY);
   return ch;
@@ -303,26 +271,18 @@ static int32_t platform_write_hts(void *handle, uint8_t reg, const uint8_t *bufp
 {
   I2C_HandleTypeDef *hi2c = (I2C_HandleTypeDef *)handle;
   uint8_t reg_addr = reg;
-  if (len > 1) {
-    reg_addr |= 0x80; /* auto-increment for multi-byte */
-  }
-  if (HAL_I2C_Mem_Write(hi2c, HTS221_I2C_ADDRESS, reg_addr, I2C_MEMADD_SIZE_8BIT, (uint8_t*)bufp, len, 1000) != HAL_OK) {
-    return -1;
-  }
-  return 0;
+  if (len > 1) reg_addr |= 0x80;
+  return (HAL_I2C_Mem_Write(hi2c, HTS221_I2C_ADDRESS, reg_addr,
+                           I2C_MEMADD_SIZE_8BIT, (uint8_t*)bufp, len, 1000) == HAL_OK) ? 0 : -1;
 }
 
 static int32_t platform_read_hts(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len)
 {
   I2C_HandleTypeDef *hi2c = (I2C_HandleTypeDef *)handle;
   uint8_t reg_addr = reg;
-  if (len > 1) {
-    reg_addr |= 0x80; /* auto-increment for multi-byte */
-  }
-  if (HAL_I2C_Mem_Read(hi2c, HTS221_I2C_ADDRESS, reg_addr, I2C_MEMADD_SIZE_8BIT, bufp, len, 1000) != HAL_OK) {
-    return -1;
-  }
-  return 0;
+  if (len > 1) reg_addr |= 0x80;
+  return (HAL_I2C_Mem_Read(hi2c, HTS221_I2C_ADDRESS, reg_addr,
+                          I2C_MEMADD_SIZE_8BIT, bufp, len, 1000) == HAL_OK) ? 0 : -1;
 }
 
 /* Platform write/read functions for LPS22HH (I2C) */
@@ -330,32 +290,18 @@ static int32_t platform_write_lps(void *handle, uint8_t reg, const uint8_t *bufp
 {
   I2C_HandleTypeDef *hi2c = (I2C_HandleTypeDef *)handle;
   uint8_t reg_addr = reg;
-  if (len > 1) {
-    reg_addr |= 0x80; /* auto-increment for multi-byte */
-  }
-  if (HAL_I2C_Mem_Write(hi2c, LPS22HH_I2C_ADD_H, reg_addr, I2C_MEMADD_SIZE_8BIT, (uint8_t*)bufp, len, 1000) != HAL_OK) {
-    return -1;
-  }
-  return 0;
+  if (len > 1) reg_addr |= 0x80;
+  return (HAL_I2C_Mem_Write(hi2c, LPS22HH_I2C_ADD_H, reg_addr,
+                           I2C_MEMADD_SIZE_8BIT, (uint8_t*)bufp, len, 1000) == HAL_OK) ? 0 : -1;
 }
 
 static int32_t platform_read_lps(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len)
 {
   I2C_HandleTypeDef *hi2c = (I2C_HandleTypeDef *)handle;
   uint8_t reg_addr = reg;
-  if (len > 1) {
-    reg_addr |= 0x80; /* auto-increment for multi-byte */
-  }
-  if (HAL_I2C_Mem_Read(hi2c, LPS22HH_I2C_ADD_H, reg_addr, I2C_MEMADD_SIZE_8BIT, bufp, len, 1000) != HAL_OK) {
-    return -1;
-  }
-  return 0;
-}
-
-/* Delay implementation */
-static void platform_delay(uint32_t ms)
-{
-  HAL_Delay(ms);
+  if (len > 1) reg_addr |= 0x80;
+  return (HAL_I2C_Mem_Read(hi2c, LPS22HH_I2C_ADD_H, reg_addr,
+                          I2C_MEMADD_SIZE_8BIT, bufp, len, 1000) == HAL_OK) ? 0 : -1;
 }
 
 /* USER CODE END 4 */
@@ -367,15 +313,9 @@ static void platform_delay(uint32_t ms)
 void Error_Handler(void)
 {
   __disable_irq();
-  while (1)
-  {
-    /* you can blink an LED here */
-  }
+  while (1) {}
 }
 
 #ifdef USE_FULL_ASSERT
-void assert_failed(uint8_t *file, uint32_t line)
-{
-  /* implementation optional */
-}
+void assert_failed(uint8_t *file, uint32_t line) {}
 #endif /* USE_FULL_ASSERT */

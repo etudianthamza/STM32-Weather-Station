@@ -25,5 +25,6 @@ SUBDIRS := \
 Core/Src \
 Core/Startup \
 Drivers/STM32F7xx_HAL_Driver/Src \
-Drivers/user \
+Drivers/user/Pression_LPS22HH_Sensor \
+Drivers/user/Temperature_and_Humidity_HTS221_Sensors \
 
