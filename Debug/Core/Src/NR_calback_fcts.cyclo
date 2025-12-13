@@ -1,1 +1,2 @@
 ../Core/Src/NR_calback_fcts.c:14:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/NR_calback_fcts.c:21:6:HAL_TIM_IC_CaptureCallback	3

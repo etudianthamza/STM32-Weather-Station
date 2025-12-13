@@ -47,7 +47,8 @@ static int16_t data_raw_temperature_hts;
 static uint32_t data_raw_pressure_lps;
 
 volatile uint8_t Flag_Tim6 = 0;
-float humidity, temperature, pressure;
+volatile uint8_t Flag_Tim2 = 0;
+float humidity, temperature, pressure, vitesse_vent;
 
 typedef struct {
     float x0, y0;
@@ -145,8 +146,12 @@ int main(void)
         {
             LireCapteursTemp_Hum(&humidity, &temperature);
             LireCapteurPression(&pressure);
-            printf("Temperature: %.2f°C | Humidité: %.2f%% | Pression: %.2fhPa\r\n", temperature, humidity, pressure);
+            printf("Tem: %.2f°C | Hum: %.2f%% | Press: %.2fhPa\r\n", temperature, humidity, pressure);
+            printf("Wind Speed: %.2fkm/h\r\n", vitesse_vent);
             Flag_Tim6 = 0;
+        } else if (Flag_Tim2){
+        	Lecture_anenometer(&vitesse_vent);
+        	Flag_Tim2 = 0;
         }
     }
 }

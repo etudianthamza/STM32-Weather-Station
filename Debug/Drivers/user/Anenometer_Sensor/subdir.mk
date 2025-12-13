@@ -1,0 +1,27 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+# Toolchain: GNU Tools for STM32 (13.3.rel1)
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+../Drivers/user/Anenometer_Sensor/Lecture_anenometer.c 
+
+OBJS += \
+./Drivers/user/Anenometer_Sensor/Lecture_anenometer.o 
+
+C_DEPS += \
+./Drivers/user/Anenometer_Sensor/Lecture_anenometer.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+Drivers/user/Anenometer_Sensor/%.o Drivers/user/Anenometer_Sensor/%.su Drivers/user/Anenometer_Sensor/%.cyclo: ../Drivers/user/Anenometer_Sensor/%.c Drivers/user/Anenometer_Sensor/subdir.mk
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Drivers/user -I../Drivers/user/Temperature_and_Humidity_HTS221_Sensors -I../Drivers/user/Pression_LPS22HH_Sensor -I../Drivers/user/Anenometer_Sensor -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
+
+clean: clean-Drivers-2f-user-2f-Anenometer_Sensor
+
+clean-Drivers-2f-user-2f-Anenometer_Sensor:
+	-$(RM) ./Drivers/user/Anenometer_Sensor/Lecture_anenometer.cyclo ./Drivers/user/Anenometer_Sensor/Lecture_anenometer.d ./Drivers/user/Anenometer_Sensor/Lecture_anenometer.o ./Drivers/user/Anenometer_Sensor/Lecture_anenometer.su
+
+.PHONY: clean-Drivers-2f-user-2f-Anenometer_Sensor
+
