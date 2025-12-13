@@ -7,45 +7,45 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   1 .text         00007edc  080001d0  080001d0  000011d0  2**4
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       000003b4  080080b0  080080b0  000090b0  2**3
+  2 .rodata       000003cc  080080b0  080080b0  000090b0  2**3
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08008464  08008464  0000a1d4  2**0
+  3 .ARM.extab    00000000  0800847c  0800847c  0000a1d4  2**0
                   CONTENTS, READONLY
-  4 .ARM          00000008  08008464  08008464  00009464  2**2
+  4 .ARM          00000008  0800847c  0800847c  0000947c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  0800846c  0800846c  0000a1d4  2**0
+  5 .preinit_array 00000000  08008484  08008484  0000a1d4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  0800846c  0800846c  0000946c  2**2
+  6 .init_array   00000004  08008484  08008484  00009484  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  7 .fini_array   00000004  08008470  08008470  00009470  2**2
+  7 .fini_array   00000004  08008488  08008488  00009488  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  8 .data         000001d4  20000000  08008474  0000a000  2**2
+  8 .data         000001d4  20000000  0800848c  0000a000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          000002f8  200001d4  08008648  0000a1d4  2**2
+  9 .bss          000002f8  200001d4  08008660  0000a1d4  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  200004cc  08008648  0000a4cc  2**0
+ 10 ._user_heap_stack 00000604  200004cc  08008660  0000a4cc  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000a1d4  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0001739a  00000000  00000000  0000a204  2**0
+ 12 .debug_info   00017397  00000000  00000000  0000a204  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00002f48  00000000  00000000  0002159e  2**0
+ 13 .debug_abbrev 00002f5a  00000000  00000000  0002159b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 000014a0  00000000  00000000  000244e8  2**3
+ 14 .debug_aranges 000014a0  00000000  00000000  000244f8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00000ff3  00000000  00000000  00025988  2**0
+ 15 .debug_rnglists 00000ff3  00000000  00000000  00025998  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00028251  00000000  00000000  0002697b  2**0
+ 16 .debug_macro  00028251  00000000  00000000  0002698b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00017c41  00000000  00000000  0004ebcc  2**0
+ 17 .debug_line   00017c41  00000000  00000000  0004ebdc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000f51de  00000000  00000000  0006680d  2**0
+ 18 .debug_str    000f51de  00000000  00000000  0006681d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  0015b9eb  2**0
+ 19 .comment      00000043  00000000  00000000  0015b9fb  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000669c  00000000  00000000  0015ba30  2**2
+ 20 .debug_frame  0000669c  00000000  00000000  0015ba40  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000006b  00000000  00000000  001620cc  2**0
+ 21 .debug_line_str 0000006b  00000000  00000000  001620dc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2043,7 +2043,7 @@ int main(void)
             LireCapteurPression(&pressure);
  80013f4:	4825      	ldr	r0, [pc, #148]	@ (800148c <main+0x198>)
  80013f6:	f000 f91f 	bl	8001638 <LireCapteurPression>
-            printf("T: %.2f°C | H: %.2f%% | P: %.2fhPa\r\n", temperature, humidity, pressure);
+            printf("Temperature: %.2f°C | Humidité: %.2f%% | Pression: %.2fhPa\r\n", temperature, humidity, pressure);
  80013fa:	4b22      	ldr	r3, [pc, #136]	@ (8001484 <main+0x190>)
  80013fc:	681b      	ldr	r3, [r3, #0]
  80013fe:	4618      	mov	r0, r3
@@ -2230,10 +2230,10 @@ void SystemClock_Config(void)
  800156c:	40007000 	.word	0x40007000
 
 08001570 <LireCapteursTemp_Hum>:
-  * @param hum_hts Pointeur vers la variable d'humidité
-  * @param temp_hts Pointeur vers la variable de température
-  * @retval None
-  */
+/* USER CODE BEGIN 4 */
+
+
+//====================LireCapteursTemp_Hum================//
 void LireCapteursTemp_Hum(float *hum_hts, float *temp_hts)
 {
  8001570:	b580      	push	{r7, lr}
@@ -2345,10 +2345,8 @@ void LireCapteursTemp_Hum(float *hum_hts, float *temp_hts)
  8001634:	20000294 	.word	0x20000294
 
 08001638 <LireCapteurPression>:
-  * @brief Fonction unique pour lire la pression
-  * @param press_lps Pointeur vers la variable de pression
-  * @retval None
-  */
+
+//====================LireCapteurPression================//
 void LireCapteurPression(float *press_lps)
 {
  8001638:	b580      	push	{r7, lr}
@@ -3325,9 +3323,9 @@ void MX_TIM6_Init(void)
  8001b36:	4b12      	ldr	r3, [pc, #72]	@ (8001b80 <MX_TIM6_Init+0x68>)
  8001b38:	2200      	movs	r2, #0
  8001b3a:	609a      	str	r2, [r3, #8]
-  htim6.Init.Period = 9999;
+  htim6.Init.Period = 49999;
  8001b3c:	4b10      	ldr	r3, [pc, #64]	@ (8001b80 <MX_TIM6_Init+0x68>)
- 8001b3e:	f242 720f 	movw	r2, #9999	@ 0x270f
+ 8001b3e:	f24c 324f 	movw	r2, #49999	@ 0xc34f
  8001b42:	60da      	str	r2, [r3, #12]
   htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
  8001b44:	4b0e      	ldr	r3, [pc, #56]	@ (8001b80 <MX_TIM6_Init+0x68>)
@@ -3737,7 +3735,7 @@ LoopFillZerobss:
   ldr r1, =_edata
  8001d78:	200001d4 	.word	0x200001d4
   ldr r2, =_sidata
- 8001d7c:	08008474 	.word	0x08008474
+ 8001d7c:	0800848c 	.word	0x0800848c
   ldr r2, =_sbss
  8001d80:	200001d4 	.word	0x200001d4
   ldr r4, =_ebss
@@ -8372,7 +8370,7 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(const RCC_ClkInitTypeDef  *RCC_ClkInitStru
  80037b2:	bf00      	nop
  80037b4:	40023c00 	.word	0x40023c00
  80037b8:	40023800 	.word	0x40023800
- 80037bc:	080080d8 	.word	0x080080d8
+ 80037bc:	080080f0 	.word	0x080080f0
  80037c0:	20000000 	.word	0x20000000
  80037c4:	20000004 	.word	0x20000004
 
@@ -8627,7 +8625,7 @@ uint32_t HAL_RCC_GetPCLK1Freq(void)
  8003988:	4618      	mov	r0, r3
  800398a:	bd80      	pop	{r7, pc}
  800398c:	40023800 	.word	0x40023800
- 8003990:	080080e8 	.word	0x080080e8
+ 8003990:	08008100 	.word	0x08008100
 
 08003994 <HAL_RCC_GetPCLK2Freq>:
   * @note   Each time PCLK2 changes, this function must be called to update the
@@ -8653,7 +8651,7 @@ uint32_t HAL_RCC_GetPCLK2Freq(void)
  80039b0:	4618      	mov	r0, r3
  80039b2:	bd80      	pop	{r7, pc}
  80039b4:	40023800 	.word	0x40023800
- 80039b8:	080080e8 	.word	0x080080e8
+ 80039b8:	08008100 	.word	0x08008100
 
 080039bc <HAL_RCCEx_PeriphCLKConfig>:
   *         the backup registers) are set to their reset values.
@@ -14166,11 +14164,11 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  8005b6c:	e7ee      	b.n	8005b4c <_printf_float+0x2a4>
  8005b6e:	bf00      	nop
  8005b70:	7fefffff 	.word	0x7fefffff
- 8005b74:	080080f4 	.word	0x080080f4
- 8005b78:	080080f0 	.word	0x080080f0
- 8005b7c:	080080fc 	.word	0x080080fc
- 8005b80:	080080f8 	.word	0x080080f8
- 8005b84:	08008100 	.word	0x08008100
+ 8005b74:	0800810c 	.word	0x0800810c
+ 8005b78:	08008108 	.word	0x08008108
+ 8005b7c:	08008114 	.word	0x08008114
+ 8005b80:	08008110 	.word	0x08008110
+ 8005b84:	08008118 	.word	0x08008118
  8005b88:	6da3      	ldr	r3, [r4, #88]	@ 0x58
  8005b8a:	f8dd a028 	ldr.w	sl, [sp, #40]	@ 0x28
  8005b8e:	4553      	cmp	r3, sl
@@ -14648,8 +14646,8 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  8006004:	2500      	movs	r5, #0
  8006006:	f104 0619 	add.w	r6, r4, #25
  800600a:	e7f5      	b.n	8005ff8 <_printf_i+0x220>
- 800600c:	08008102 	.word	0x08008102
- 8006010:	08008113 	.word	0x08008113
+ 800600c:	0800811a 	.word	0x0800811a
+ 8006010:	0800812b 	.word	0x0800812b
 
 08006014 <std>:
  8006014:	2300      	movs	r3, #0
@@ -15007,10 +15005,10 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  8006326:	4798      	blx	r3
  8006328:	3601      	adds	r6, #1
  800632a:	e7f2      	b.n	8006312 <__libc_init_array+0x1e>
- 800632c:	0800846c 	.word	0x0800846c
- 8006330:	0800846c 	.word	0x0800846c
- 8006334:	0800846c 	.word	0x0800846c
- 8006338:	08008470 	.word	0x08008470
+ 800632c:	08008484 	.word	0x08008484
+ 8006330:	08008484 	.word	0x08008484
+ 8006334:	08008484 	.word	0x08008484
+ 8006338:	08008488 	.word	0x08008488
 
 0800633c <__retarget_lock_init_recursive>:
  800633c:	4770      	bx	lr
@@ -15407,15 +15405,15 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  800671c:	3fc68a28 	.word	0x3fc68a28
  8006720:	509f79fb 	.word	0x509f79fb
  8006724:	3fd34413 	.word	0x3fd34413
- 8006728:	08008131 	.word	0x08008131
- 800672c:	08008148 	.word	0x08008148
+ 8006728:	08008149 	.word	0x08008149
+ 800672c:	08008160 	.word	0x08008160
  8006730:	7ff00000 	.word	0x7ff00000
- 8006734:	08008101 	.word	0x08008101
+ 8006734:	08008119 	.word	0x08008119
  8006738:	3ff80000 	.word	0x3ff80000
- 800673c:	08008298 	.word	0x08008298
- 8006740:	080081a0 	.word	0x080081a0
- 8006744:	0800812d 	.word	0x0800812d
- 8006748:	08008100 	.word	0x08008100
+ 800673c:	080082b0 	.word	0x080082b0
+ 8006740:	080081b8 	.word	0x080081b8
+ 8006744:	08008145 	.word	0x08008145
+ 8006748:	08008118 	.word	0x08008118
  800674c:	f8d9 301c 	ldr.w	r3, [r9, #28]
  8006750:	6018      	str	r0, [r3, #0]
  8006752:	9b03      	ldr	r3, [sp, #12]
@@ -15644,8 +15642,8 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  80069d0:	e9cd 0104 	strd	r0, r1, [sp, #16]
  80069d4:	e7c4      	b.n	8006960 <_dtoa_r+0x508>
  80069d6:	bf00      	nop
- 80069d8:	08008298 	.word	0x08008298
- 80069dc:	08008270 	.word	0x08008270
+ 80069d8:	080082b0 	.word	0x080082b0
+ 80069dc:	08008288 	.word	0x08008288
  80069e0:	3ff00000 	.word	0x3ff00000
  80069e4:	40240000 	.word	0x40240000
  80069e8:	401c0000 	.word	0x401c0000
@@ -16274,8 +16272,8 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  8006fe8:	f000 f968 	bl	80072bc <__multadd>
  8006fec:	9002      	str	r0, [sp, #8]
  8006fee:	e7eb      	b.n	8006fc8 <_dtoa_r+0xb70>
- 8006ff0:	080081a0 	.word	0x080081a0
- 8006ff4:	08008124 	.word	0x08008124
+ 8006ff0:	080081b8 	.word	0x080081b8
+ 8006ff4:	0800813c 	.word	0x0800813c
 
 08006ff8 <_free_r>:
  8006ff8:	b538      	push	{r3, r4, r5, lr}
@@ -16559,8 +16557,8 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  8007268:	e9c0 3303 	strd	r3, r3, [r0, #12]
  800726c:	e7f7      	b.n	800725e <_Balloc+0x66>
  800726e:	bf00      	nop
- 8007270:	08008131 	.word	0x08008131
- 8007274:	080081b1 	.word	0x080081b1
+ 8007270:	08008149 	.word	0x08008149
+ 8007274:	080081c9 	.word	0x080081c9
 
 08007278 <_Bfree>:
  8007278:	b570      	push	{r4, r5, r6, lr}
@@ -16588,8 +16586,8 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  80072ac:	6021      	str	r1, [r4, #0]
  80072ae:	f843 4022 	str.w	r4, [r3, r2, lsl #2]
  80072b2:	bd70      	pop	{r4, r5, r6, pc}
- 80072b4:	08008131 	.word	0x08008131
- 80072b8:	080081b1 	.word	0x080081b1
+ 80072b4:	08008149 	.word	0x08008149
+ 80072b8:	080081c9 	.word	0x080081c9
 
 080072bc <__multadd>:
  80072bc:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
@@ -16643,8 +16641,8 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  8007338:	6125      	str	r5, [r4, #16]
  800733a:	4620      	mov	r0, r4
  800733c:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
- 8007340:	080081a0 	.word	0x080081a0
- 8007344:	080081b1 	.word	0x080081b1
+ 8007340:	080081b8 	.word	0x080081b8
+ 8007344:	080081c9 	.word	0x080081c9
 
 08007348 <__hi0bits>:
  8007348:	f5b0 3f80 	cmp.w	r0, #65536	@ 0x10000
@@ -16734,8 +16732,8 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  80073fe:	6103      	str	r3, [r0, #16]
  8007400:	bd10      	pop	{r4, pc}
  8007402:	bf00      	nop
- 8007404:	080081a0 	.word	0x080081a0
- 8007408:	080081b1 	.word	0x080081b1
+ 8007404:	080081b8 	.word	0x080081b8
+ 8007408:	080081c9 	.word	0x080081c9
 
 0800740c <__multiply>:
  800740c:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
@@ -16854,8 +16852,8 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  8007542:	e79f      	b.n	8007484 <__multiply+0x78>
  8007544:	3e01      	subs	r6, #1
  8007546:	e7a1      	b.n	800748c <__multiply+0x80>
- 8007548:	080081a0 	.word	0x080081a0
- 800754c:	080081b1 	.word	0x080081b1
+ 8007548:	080081b8 	.word	0x080081b8
+ 800754c:	080081c9 	.word	0x080081c9
 
 08007550 <__pow5mult>:
  8007550:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
@@ -16923,9 +16921,9 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  80075f0:	4630      	mov	r0, r6
  80075f2:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
  80075f6:	bf00      	nop
- 80075f8:	08008264 	.word	0x08008264
- 80075fc:	08008131 	.word	0x08008131
- 8007600:	080081b1 	.word	0x080081b1
+ 80075f8:	0800827c 	.word	0x0800827c
+ 80075fc:	08008149 	.word	0x08008149
+ 8007600:	080081c9 	.word	0x080081c9
 
 08007604 <__lshift>:
  8007604:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
@@ -17004,8 +17002,8 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  80076ce:	d8f9      	bhi.n	80076c4 <__lshift+0xc0>
  80076d0:	e7ea      	b.n	80076a8 <__lshift+0xa4>
  80076d2:	bf00      	nop
- 80076d4:	080081a0 	.word	0x080081a0
- 80076d8:	080081b1 	.word	0x080081b1
+ 80076d4:	080081b8 	.word	0x080081b8
+ 80076d8:	080081c9 	.word	0x080081c9
 
 080076dc <__mcmp>:
  80076dc:	690a      	ldr	r2, [r1, #16]
@@ -17141,8 +17139,8 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  800782e:	3f01      	subs	r7, #1
  8007830:	e7e7      	b.n	8007802 <__mdiff+0xee>
  8007832:	bf00      	nop
- 8007834:	080081a0 	.word	0x080081a0
- 8007838:	080081b1 	.word	0x080081b1
+ 8007834:	080081b8 	.word	0x080081b8
+ 8007838:	080081c9 	.word	0x080081c9
 
 0800783c <__d2b>:
  800783c:	e92d 43f7 	stmdb	sp!, {r0, r1, r2, r4, r5, r6, r7, r8, r9, lr}
@@ -17208,8 +17206,8 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  80078da:	f7ff fd35 	bl	8007348 <__hi0bits>
  80078de:	ebc0 1042 	rsb	r0, r0, r2, lsl #5
  80078e2:	e7e5      	b.n	80078b0 <__d2b+0x74>
- 80078e4:	080081a0 	.word	0x080081a0
- 80078e8:	080081b1 	.word	0x080081b1
+ 80078e4:	080081b8 	.word	0x080081b8
+ 80078e8:	080081c9 	.word	0x080081c9
 
 080078ec <__sfputc_r>:
  80078ec:	6893      	ldr	r3, [r2, #8]
@@ -17475,11 +17473,11 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  8007b54:	4630      	mov	r0, r6
  8007b56:	f7fe f93f 	bl	8005dd8 <_printf_i>
  8007b5a:	e7e4      	b.n	8007b26 <_vfiprintf_r+0x1e6>
- 8007b5c:	0800820a 	.word	0x0800820a
- 8007b60:	08008214 	.word	0x08008214
+ 8007b5c:	08008222 	.word	0x08008222
+ 8007b60:	0800822c 	.word	0x0800822c
  8007b64:	080058a9 	.word	0x080058a9
  8007b68:	0800791b 	.word	0x0800791b
- 8007b6c:	08008210 	.word	0x08008210
+ 8007b6c:	08008228 	.word	0x08008228
 
 08007b70 <__sflush_r>:
  8007b70:	f9b1 200c 	ldrsh.w	r2, [r1, #12]
@@ -17820,9 +17818,9 @@ int32_t hts221_temp_adc_point_1_get(const stmdev_ctx_t *ctx, float_t *val)
  8007e54:	e7f3      	b.n	8007e3e <__assert_func+0x12>
  8007e56:	bf00      	nop
  8007e58:	20000018 	.word	0x20000018
- 8007e5c:	08008225 	.word	0x08008225
- 8007e60:	08008232 	.word	0x08008232
- 8007e64:	08008260 	.word	0x08008260
+ 8007e5c:	0800823d 	.word	0x0800823d
+ 8007e60:	0800824a 	.word	0x0800824a
+ 8007e64:	08008278 	.word	0x08008278
 
 08007e68 <_calloc_r>:
  8007e68:	b570      	push	{r4, r5, r6, lr}

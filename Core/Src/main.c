@@ -145,7 +145,7 @@ int main(void)
         {
             LireCapteursTemp_Hum(&humidity, &temperature);
             LireCapteurPression(&pressure);
-            printf("T: %.2f°C | H: %.2f%% | P: %.2fhPa\r\n", temperature, humidity, pressure);
+            printf("Temperature: %.2f°C | Humidité: %.2f%% | Pression: %.2fhPa\r\n", temperature, humidity, pressure);
             Flag_Tim6 = 0;
         }
     }
