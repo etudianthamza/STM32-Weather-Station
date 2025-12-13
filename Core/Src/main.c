@@ -152,6 +152,10 @@ int main(void)
         } else if (Flag_Tim2){
         	Lecture_anenometer(&vitesse_vent);
         	Flag_Tim2 = 0;
+        } else {
+        	HAL_SuspendTick();
+        	HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
+        	HAL_ResumeTick();
         }
     }
 }
