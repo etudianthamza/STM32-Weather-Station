@@ -237,12 +237,23 @@ void LireCapteurPression(float *press_lps)
 {
     lps22hh_status_t status;
 
+    // Lancer une mesure one-shot
+    uint8_t ctrl_reg1;
+    lps22hh_read_reg(&dev_ctx_lps, LPS22HH_CTRL_REG1, &ctrl_reg1, 1);
+    ctrl_reg1 |= 0x01; // Set ONE_SHOT bit
+    lps22hh_write_reg(&dev_ctx_lps, LPS22HH_CTRL_REG1, &ctrl_reg1, 1);
+
+    // Lire le status pour savoir si la mesure est prête
     lps22hh_read_reg(&dev_ctx_lps, LPS22HH_STATUS, (uint8_t *)&status, 1);
 
     if (status.p_da)
     {
         lps22hh_pressure_raw_get(&dev_ctx_lps, &data_raw_pressure_lps);
         *press_lps = lps22hh_from_lsb_to_hpa(data_raw_pressure_lps);
+    }
+    else
+    {
+        *press_lps = 0.0f; // ou conserver la dernière valeur valide
     }
 }
 
