@@ -57,6 +57,9 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define WAKEUP_BTN_Pin GPIO_PIN_11
+#define WAKEUP_BTN_GPIO_Port GPIOI
+#define WAKEUP_BTN_EXTI_IRQn EXTI15_10_IRQn
 
 /* USER CODE BEGIN Private defines */
 

@@ -1,11 +1,5 @@
-../Core/Src/main.c:87:5:main	5
-../Core/Src/main.c:167:6:SystemClock_Config	4
-../Core/Src/main.c:210:6:LireCapteursTemp_Hum	3
-../Core/Src/main.c:245:6:LireCapteurPression	2
-../Core/Src/main.c:272:9:linear_interpolation	1
-../Core/Src/main.c:282:1:__io_putchar	1
-../Core/Src/main.c:290:16:platform_write_hts	3
-../Core/Src/main.c:299:16:platform_read_hts	3
-../Core/Src/main.c:309:16:platform_write_lps	3
-../Core/Src/main.c:318:16:platform_read_lps	3
-../Core/Src/main.c:333:6:Error_Handler	1
+../Core/Src/main.c:95:5:main	10
+../Core/Src/main.c:274:6:SystemClock_Config	4
+../Core/Src/main.c:333:1:__io_putchar	1
+../Core/Src/main.c:340:6:RTC_Init	2
+../Core/Src/main.c:368:6:Error_Handler	1

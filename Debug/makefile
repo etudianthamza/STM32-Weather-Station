@@ -11,8 +11,28 @@ RM := rm -rf
 -include sources.mk
 -include Drivers/user/Temperature_and_Humidity_HTS221_Sensors/subdir.mk
 -include Drivers/user/Pression_LPS22HH_Sensor/subdir.mk
+-include Drivers/user/Girouette_sensor/subdir.mk
 -include Drivers/user/Anenometer_Sensor/subdir.mk
 -include Drivers/STM32F7xx_HAL_Driver/Src/subdir.mk
+-include Drivers/BSP/STM32746G-Discovery/subdir.mk
+-include Drivers/BSP/Components/wm8994/subdir.mk
+-include Drivers/BSP/Components/ts3510/subdir.mk
+-include Drivers/BSP/Components/stmpe811/subdir.mk
+-include Drivers/BSP/Components/st7789h2/subdir.mk
+-include Drivers/BSP/Components/st7735/subdir.mk
+-include Drivers/BSP/Components/s5k5cag/subdir.mk
+-include Drivers/BSP/Components/ov9655/subdir.mk
+-include Drivers/BSP/Components/ov5640/subdir.mk
+-include Drivers/BSP/Components/otm8009a/subdir.mk
+-include Drivers/BSP/Components/nt35510/subdir.mk
+-include Drivers/BSP/Components/mfxstm32l152/subdir.mk
+-include Drivers/BSP/Components/lan8742/subdir.mk
+-include Drivers/BSP/Components/ft6x06/subdir.mk
+-include Drivers/BSP/Components/ft5336/subdir.mk
+-include Drivers/BSP/Components/ft3x67/subdir.mk
+-include Drivers/BSP/Components/exc7200/subdir.mk
+-include Drivers/BSP/Components/dp83848/subdir.mk
+-include Drivers/BSP/Components/adv7533/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk
@@ -63,8 +83,8 @@ all: main-build
 main-build: Weather_Station_V1.elf secondary-outputs
 
 # Tool invocations
-Weather_Station_V1.elf Weather_Station_V1.map: $(OBJS) $(USER_OBJS) /home/hamza/STM32CubeIDE/workspace_1.19.0/Weather_Station_V1/STM32F746NGHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Weather_Station_V1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/hamza/STM32CubeIDE/workspace_1.19.0/Weather_Station_V1/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Weather_Station_V1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Weather_Station_V1.elf Weather_Station_V1.map: $(OBJS) $(USER_OBJS) /home/hamza/STM32CubeIDE/workspace_1.19.0/Weather_Station_V3_FIX/Weather_Station_V1/STM32F746NGHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Weather_Station_V1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/hamza/STM32CubeIDE/workspace_1.19.0/Weather_Station_V3_FIX/Weather_Station_V1/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Weather_Station_V1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

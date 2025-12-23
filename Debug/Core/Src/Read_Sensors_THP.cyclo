@@ -1,0 +1,11 @@
+../Core/Src/Read_Sensors_THP.c:28:16:platform_write_hts	3
+../Core/Src/Read_Sensors_THP.c:37:16:platform_read_hts	3
+../Core/Src/Read_Sensors_THP.c:47:16:platform_write_lps	3
+../Core/Src/Read_Sensors_THP.c:56:16:platform_read_lps	3
+../Core/Src/Read_Sensors_THP.c:66:9:linear_interpolation	1
+../Core/Src/Read_Sensors_THP.c:72:6:SensorsTHP_Init	1
+../Core/Src/Read_Sensors_THP.c:79:6:HTS221_Init	2
+../Core/Src/Read_Sensors_THP.c:112:6:LPS22HH_Init	2
+../Core/Src/Read_Sensors_THP.c:134:6:LireCapteursTemp_Hum	3
+../Core/Src/Read_Sensors_THP.c:167:6:LireCapteurPression	3
+../Core/Src/Read_Sensors_THP.c:189:6:SensorsTHP_ReadAll	1

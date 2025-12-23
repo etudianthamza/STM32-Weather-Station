@@ -1,1 +1,7 @@
-../Drivers/user/Anenometer_Sensor/Lecture_anenometer.c:15:6:Lecture_anenometer	2
+../Drivers/user/Anenometer_Sensor/Lecture_anenometer.c:47:14:Calculate_Period_us	2
+../Drivers/user/Anenometer_Sensor/Lecture_anenometer.c:73:14:Calculate_Speed_From_Period	2
+../Drivers/user/Anenometer_Sensor/Lecture_anenometer.c:97:6:Anemometer_Capture_Handler	1
+../Drivers/user/Anenometer_Sensor/Lecture_anenometer.c:111:6:Lecture_anenometer	8
+../Drivers/user/Anenometer_Sensor/Lecture_anenometer.c:178:6:Anemometer_Init	1
+../Drivers/user/Anenometer_Sensor/Lecture_anenometer.c:191:10:Anemometer_Get_Pulse_Count	1
+../Drivers/user/Anenometer_Sensor/Lecture_anenometer.c:199:6:Anemometer_Reset_Pulse_Count	1

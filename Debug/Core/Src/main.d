@@ -19,20 +19,44 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_cortex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_adc.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_adc_ex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma2d.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash_ex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_sdram.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_fmc.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_ltdc.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_ltdc_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rtc.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rtc_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
- ../Core/Inc/i2c.h ../Core/Inc/main.h ../Core/Inc/usart.h \
- ../Core/Inc/gpio.h ../Core/Inc/tim.h \
+ ../Core/Inc/adc.h ../Core/Inc/main.h ../Core/Inc/dma2d.h \
+ ../Core/Inc/i2c.h ../Core/Inc/ltdc.h ../Core/Inc/rtc.h ../Core/Inc/tim.h \
+ ../Core/Inc/usart.h ../Core/Inc/gpio.h ../Core/Inc/fmc.h \
+ ../Core/Inc/screen.h \
+ ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.h \
+ ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h \
+ ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_lcd.h \
+ ../Drivers/BSP/STM32746G-Discovery/../Components/rk043fn48h/rk043fn48h.h \
+ ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h \
+ ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.h \
+ ../Drivers/BSP/STM32746G-Discovery/../../../Utilities/Fonts/fonts.h \
+ ../Core/Inc/data.h ../Core/Inc/rtc.h ../Core/Inc/Read_Sensors_THP.h \
  ../Drivers/user/Temperature_and_Humidity_HTS221_Sensors/hts221_reg.h \
- ../Drivers/user/Pression_LPS22HH_Sensor/lps22hh_reg.h
+ ../Drivers/user/Pression_LPS22HH_Sensor/lps22hh_reg.h ../Core/Inc/data.h \
+ ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_ts.h \
+ ../Drivers/BSP/STM32746G-Discovery/../Components/ft5336/ft5336.h \
+ ../Drivers/BSP/STM32746G-Discovery/../Components/ft5336/../Common/ts.h \
+ ../Drivers/user/Anenometer_Sensor/Lecture_anenometer.h \
+ ../Drivers/user/Girouette_sensor/Lecture_girouette.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
 ../Core/Inc/stm32f7xx_hal_conf.h:
@@ -54,20 +78,51 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma_ex.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_cortex.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_adc.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_adc_ex.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma2d.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash_ex.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_sdram.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_fmc.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_ltdc.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_ltdc_ex.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rtc.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rtc_ex.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h:
-../Core/Inc/i2c.h:
+../Core/Inc/adc.h:
 ../Core/Inc/main.h:
+../Core/Inc/dma2d.h:
+../Core/Inc/i2c.h:
+../Core/Inc/ltdc.h:
+../Core/Inc/rtc.h:
+../Core/Inc/tim.h:
 ../Core/Inc/usart.h:
 ../Core/Inc/gpio.h:
-../Core/Inc/tim.h:
+../Core/Inc/fmc.h:
+../Core/Inc/screen.h:
+../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.h:
+../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h:
+../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_lcd.h:
+../Drivers/BSP/STM32746G-Discovery/../Components/rk043fn48h/rk043fn48h.h:
+../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h:
+../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.h:
+../Drivers/BSP/STM32746G-Discovery/../../../Utilities/Fonts/fonts.h:
+../Core/Inc/data.h:
+../Core/Inc/rtc.h:
+../Core/Inc/Read_Sensors_THP.h:
 ../Drivers/user/Temperature_and_Humidity_HTS221_Sensors/hts221_reg.h:
 ../Drivers/user/Pression_LPS22HH_Sensor/lps22hh_reg.h:
+../Core/Inc/data.h:
+../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_ts.h:
+../Drivers/BSP/STM32746G-Discovery/../Components/ft5336/ft5336.h:
+../Drivers/BSP/STM32746G-Discovery/../Components/ft5336/../Common/ts.h:
+../Drivers/user/Anenometer_Sensor/Lecture_anenometer.h:
+../Drivers/user/Girouette_sensor/Lecture_girouette.h:

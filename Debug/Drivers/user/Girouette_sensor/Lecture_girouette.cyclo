@@ -1,0 +1,9 @@
+../Drivers/user/Girouette_sensor/Lecture_girouette.c:54:15:Binary_Search_Direction	5
+../Drivers/user/Girouette_sensor/Lecture_girouette.c:81:14:Interpolate_Angle	5
+../Drivers/user/Girouette_sensor/Lecture_girouette.c:114:6:Girouette_Init	1
+../Drivers/user/Girouette_sensor/Lecture_girouette.c:132:6:Girouette_Start_Conversion	2
+../Drivers/user/Girouette_sensor/Lecture_girouette.c:144:6:Girouette_Read_Direction	9
+../Drivers/user/Girouette_sensor/Lecture_girouette.c:220:13:Girouette_Get_Direction_Text	2
+../Drivers/user/Girouette_sensor/Lecture_girouette.c:236:13:Girouette_Get_Direction_Short	2
+../Drivers/user/Girouette_sensor/Lecture_girouette.c:252:7:Girouette_Get_Angle	2
+../Drivers/user/Girouette_sensor/Lecture_girouette.c:269:9:Girouette_Detect_Change	2
