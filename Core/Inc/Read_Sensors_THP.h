@@ -32,8 +32,8 @@ extern stmdev_ctx_t dev_ctx_lps;
 extern I2C_HandleTypeDef hi2c1;
 
 // Prototypes des fonctions de lecture
-void LireCapteursTemp_Hum(float *hum_hts, float *temp_hts);
-void LireCapteurPression(float *press_lps);
+void LireCapteursTemp_Hum(volatile float *hum_hts, float volatile *temp_hts);
+void LireCapteurPression(volatile float *press_lps);
 
 // Prototype de fonction d'interpolation
 float_t linear_interpolation(lin_t *lin, int16_t x);

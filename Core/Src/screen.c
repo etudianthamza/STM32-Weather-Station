@@ -10,7 +10,9 @@
 #include <string.h>
 #include "image.h"
 #include "data.h"
-
+#include "Lecture_anenometer.h"
+#include "Lecture_girouette.h"
+#include "Lecture_pluviometre.h"
 /**
  * @brief  Convertit l'angle en direction courte
  * @param  angle : Angle en degrés
@@ -87,7 +89,7 @@ void init_screen() {
 	BSP_LCD_SetFont(&Font24);
 	BSP_LCD_SetBackColor(LCD_COLOR_DARKGRAY);
 	BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-	BSP_LCD_DisplayStringAt(0, 10, "Initialisation", CENTER_MODE);
+	BSP_LCD_DisplayStringAt(0, 10, (uint8_t*)"Initialisation", CENTER_MODE);
 	BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
 }
 
@@ -153,13 +155,14 @@ void update_screen(int current_page)
 		} else {
 		    strcpy(measure_values[4], "N/A");
 		}
-
+		// Pluie - afficher l'intensité (mm/h)
+		snprintf(measure_values[5], 16, "%.1f", current_data.pluie);
 		//Affichage
 
 		BSP_LCD_SetFont(&Font24);
 		BSP_LCD_SetBackColor(LCD_COLOR_DARKGRAY);
 		BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-		BSP_LCD_DisplayStringAt(0, 10, "Donnees en temps reel", CENTER_MODE);
+		BSP_LCD_DisplayStringAt(0, 10, (uint8_t*)"Donnees en temps reel", CENTER_MODE);
 
 		for (int line = 0; line < 2; line++) {
 			for (int column = 0; column < 3; column++) {
@@ -203,7 +206,7 @@ void update_screen(int current_page)
 		}
 
 		// --- Date & heure (bas droite) ---
-		char datetime_str[24];
+		char datetime_str[32];
 
 		snprintf(datetime_str, sizeof(datetime_str),
 		         "%02d/%02d/%04d %02d:%02d:%02d",
@@ -242,7 +245,7 @@ void update_screen(int current_page)
 		BSP_LCD_SetFont(&Font12);
 		BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
 		BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-		BSP_LCD_DisplayStringAt(16, 14, "X", LEFT_MODE);
+		BSP_LCD_DisplayStringAt(16, 14, (uint8_t*)"X", LEFT_MODE);
 
 		// --- Sélection de la donnée ---
 		float values[60];

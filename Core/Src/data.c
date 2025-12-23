@@ -11,6 +11,8 @@
 #include <string.h>
 #include "Lecture_anenometer.h"
 #include "Lecture_girouette.h"
+#include "Lecture_pluviometre.h"
+extern volatile PluviometreData_t pluie_data;
 void create_data() {
 
 	RTC_TimeTypeDef sTime;
@@ -31,10 +33,12 @@ void create_data() {
 	current_data.pression = sensor_data.pressure;         // hPa
 	current_data.vent_vitesse = vitesse_vent;     // m/s
     current_data.vent_direction = current_data.vent_direction;   // degrés (0–360)
-	current_data.pluie = 0.0;            // mm
+    // Pluie - utiliser la quantité sur 1h (mm)
+    current_data.pluie = pluie_data.pluie_1h_mm;        // mm/h
+
 }
 
-void meteo_clear_buffer(meteo_data_t *buffer, uint16_t size)
+void meteo_clear_buffer(volatile meteo_data_t *buffer, uint16_t size)
 {
     if (buffer == NULL)
         return;
@@ -45,7 +49,7 @@ void meteo_clear_buffer(meteo_data_t *buffer, uint16_t size)
     }
 }
 
-void meteo_append(meteo_data_t *buffer, uint16_t size, const meteo_data_t *new_data)
+void meteo_append(volatile meteo_data_t *buffer, uint16_t size, const volatile meteo_data_t *new_data)
 {
     if (size == 0 || buffer == NULL || new_data == NULL)
         return;

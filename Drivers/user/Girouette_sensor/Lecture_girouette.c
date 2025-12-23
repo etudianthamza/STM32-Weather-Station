@@ -10,6 +10,7 @@
 #include "adc.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /* ============================
  *     TABLE DE CORRESPONDANCE
@@ -141,7 +142,7 @@ void Girouette_Start_Conversion(void)
  * @brief  Lecture et traitement de la direction
  * @param  data : Pointeur vers la structure de données à remplir
  */
-void Girouette_Read_Direction(GirouetteData_t* data)
+void Girouette_Read_Direction(volatile GirouetteData_t* data)
 {
     uint16_t adc_value = 0;
     ADC_HandleTypeDef* hadc = &hadc3;  // Utilise directement hadc3

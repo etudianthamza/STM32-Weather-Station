@@ -6,6 +6,7 @@
  */
 
 #include "stm32f7xx_hal.h"
+#include "Lecture_pluviometre.h"
 #include "tim.h"
 #include "main.h"
 
@@ -16,7 +17,6 @@ extern volatile int Flag_Tim3;
 extern volatile int Flag_Tim7;
 extern volatile uint8_t Flag_Touch;
 extern volatile int idle_time;
-extern volatile uint8_t Flag_Girouette;
 
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
@@ -34,7 +34,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
-    if (htim->Instance == TIM2 && htim -> Channel == HAL_TIM_ACTIVE_CHANNEL_1) {
+    if (htim->Instance == TIM2 && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1) {
+        // Pluviomètre
+        Pluviometre_Capture_Handler();
         Flag_Tim2 = 1;
     }
     if (htim->Instance == TIM1 && htim -> Channel == HAL_TIM_ACTIVE_CHANNEL_1) {

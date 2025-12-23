@@ -1,4 +1,4 @@
-../Core/Src/screen.c:19:20:angle_to_short_direction	20
-../Core/Src/screen.c:66:6:init_screen	1
-../Core/Src/screen.c:94:6:update_screen	24
-../Core/Src/screen.c:370:5:handle_touch	12
+../Core/Src/screen.c:21:20:angle_to_short_direction	20
+../Core/Src/screen.c:68:6:init_screen	1
+../Core/Src/screen.c:96:6:update_screen	24
+../Core/Src/screen.c:373:5:handle_touch	12

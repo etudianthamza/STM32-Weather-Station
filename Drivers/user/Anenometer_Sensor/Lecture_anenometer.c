@@ -108,7 +108,7 @@ void Anemometer_Capture_Handler(void)
  * @param  p_wind_speed : Pointeur vers la variable de vitesse
  * @note   Doit être appelé quand Flag_Tim2 est à 1
  */
-void Lecture_anenometer(float *p_wind_speed)
+void Lecture_anenometer(volatile float *p_wind_speed)
 {
     // Si pas de nouvelle capture, retourner la dernière valeur
     if (!Flag_Tim1) {

@@ -131,7 +131,7 @@ void LPS22HH_Init(void)
 }
 
 // ==== FONCTIONS DE LECTURE (EXISTANTES) ====
-void LireCapteursTemp_Hum(float *hum_hts, float *temp_hts)
+void LireCapteursTemp_Hum(volatile float *hum_hts, volatile float *temp_hts)
 {
     hts221_status_reg_t status;
     // Lancer mesure one-shot
@@ -164,7 +164,7 @@ void LireCapteursTemp_Hum(float *hum_hts, float *temp_hts)
     }
 }
 
-void LireCapteurPression(float *press_lps)
+void LireCapteurPression(volatile float *press_lps)
 {
     lps22hh_status_t status;
     uint32_t t0 = HAL_GetTick();

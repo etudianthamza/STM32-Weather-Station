@@ -35,7 +35,7 @@
 #include "stm32746g_discovery_ts.h"
 #include "Lecture_anenometer.h"
 #include "Lecture_girouette.h"
-
+#include "Lecture_pluviometre.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -60,7 +60,6 @@ volatile int Flag_Tim2 = 0;
 volatile int Flag_Tim1 = 0;
 volatile int Flag_Tim3 = 0;
 volatile uint8_t Flag_Touch = 0;
-volatile uint8_t Flag_Girouette = 0;  //Flag pour la girouette
 int current_page = 0;
 volatile meteo_data_t current_data;
 volatile meteo_data_t min_data[60]; //1 donnée par seconde pour la dernière minute
@@ -68,6 +67,7 @@ volatile meteo_data_t min_data[60]; //1 donnée par seconde pour la dernière mi
 volatile meteo_data_t day_data[1440]; //1 donnée par minute pour les dernières 24h
 volatile float vitesse_vent = 0.0;
 volatile GirouetteData_t girouette_data;  //  Données girouette
+volatile PluviometreData_t pluie_data; //  Données pluviometre
 int data_index;
 volatile int idle_time;
 /* USER CODE END PV */
@@ -137,6 +137,7 @@ int main(void)
     SensorsTHP_Init();
     Anemometer_Init();          // Anémomètre
     Girouette_Init();           // Girouette
+    Pluviometre_Init();   // pluviometre
     RTC_Init();
     idle_time = 0;
 
@@ -151,6 +152,7 @@ int main(void)
     HAL_TIM_Base_Start_IT(&htim7);
     HAL_TIM_Base_Start_IT(&htim3);
     HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_1);
+    HAL_TIM_IC_Start_IT(&htim2, TIM_CHANNEL_1);
     //  Démarrer la girouette (ADC en continu)
         Girouette_Start_Conversion();
   /* USER CODE END 2 */
@@ -201,8 +203,8 @@ int main(void)
             init_screen();
             update_screen(current_page);}
         	else // idle_time < durée (60s), on laisse le système dans son mode normal
-        		idle_time = 0;
-        		Flag_Touch = 0;
+        		{idle_time = 0;
+        		Flag_Touch = 0;}
         }
         else if (Flag_Tim7)
         {
@@ -239,6 +241,25 @@ int main(void)
             }
             meteo_append(min_data, 60, &current_data);
         }
+    	else if (Flag_Tim2)  // Pluviomètre
+    	{
+    	    // Mettre à jour les périodes du pluviomètre
+    	    Pluviometre_Update_Periodes();
+
+    	    // Lire les données courantes
+    	    Lecture_pluviometre(&pluie_data);
+
+    	    // Mettre à jour les données courantes (ex: pluie_1h_mm)
+    	    current_data.pluie = pluie_data.pluie_1h_mm;  // ou pluie_data.pluie_1h_mm
+
+    	    // Debug (optionnel)
+    	    if (pluie_data.nouvelle_mesure)
+    	    {
+    	        printf("Pluie: %.2f mm/h\r\n", pluie_data.pluie_1h_mm);
+    	    }
+
+    	    Flag_Tim2 = 0;
+    	}
         else if (Flag_Tim1)
         {
             Lecture_anenometer(&vitesse_vent);

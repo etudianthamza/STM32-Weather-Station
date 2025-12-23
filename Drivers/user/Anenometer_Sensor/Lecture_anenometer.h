@@ -16,7 +16,7 @@ extern "C" {
 
 void Anemometer_Init(void);
 void Anemometer_Capture_Handler(void);
-void Lecture_anenometer(float *vitesse_vent);
+void Lecture_anenometer(volatile float *vitesse_vent);
 uint32_t Anemometer_Get_Pulse_Count(void); // pour debug
 
 #ifdef __cplusplus

@@ -46,6 +46,7 @@ Drivers/BSP/STM32746G-Discovery \
 Drivers/STM32F7xx_HAL_Driver/Src \
 Drivers/user/Anenometer_Sensor \
 Drivers/user/Girouette_sensor \
+Drivers/user/Pluviometre_sensor \
 Drivers/user/Pression_LPS22HH_Sensor \
 Drivers/user/Temperature_and_Humidity_HTS221_Sensors \
 

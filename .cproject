@@ -57,6 +57,7 @@
 									<listOptionValue builtIn="false" value="../Drivers/user/Pression_LPS22HH_Sensor"/>
 									<listOptionValue builtIn="false" value="../Drivers/user/Anenometer_Sensor"/>
 									<listOptionValue builtIn="false" value="../Drivers/user/Girouette_sensor"/>
+									<listOptionValue builtIn="false" value="../Drivers/user/Pluviometre_sensor"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1099261048" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>

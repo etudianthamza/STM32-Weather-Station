@@ -49,7 +49,7 @@ typedef struct {
  * ============================ */
 void Girouette_Init(void);
 void Girouette_Start_Conversion(void);
-void Girouette_Read_Direction(GirouetteData_t* data);
+void Girouette_Read_Direction(volatile GirouetteData_t* data);
 const char* Girouette_Get_Direction_Text(uint16_t adc_value);
 const char* Girouette_Get_Direction_Short(uint16_t adc_value);
 float Girouette_Get_Angle(uint16_t adc_value);

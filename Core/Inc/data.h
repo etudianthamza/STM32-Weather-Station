@@ -30,8 +30,8 @@ typedef struct
 
 extern volatile meteo_data_t current_data;
 extern volatile float vitesse_vent;
-void meteo_clear_buffer(meteo_data_t *buffer, uint16_t size);
-void meteo_append(meteo_data_t *buffer, uint16_t size, const meteo_data_t *new_data);
+void meteo_clear_buffer(volatile meteo_data_t *buffer, uint16_t size);
+void meteo_append(volatile meteo_data_t *buffer, uint16_t size, const volatile meteo_data_t *new_data);
 void create_data();
 
 #endif /* INC_DATA_H_ */

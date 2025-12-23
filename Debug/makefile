@@ -11,6 +11,7 @@ RM := rm -rf
 -include sources.mk
 -include Drivers/user/Temperature_and_Humidity_HTS221_Sensors/subdir.mk
 -include Drivers/user/Pression_LPS22HH_Sensor/subdir.mk
+-include Drivers/user/Pluviometre_sensor/subdir.mk
 -include Drivers/user/Girouette_sensor/subdir.mk
 -include Drivers/user/Anenometer_Sensor/subdir.mk
 -include Drivers/STM32F7xx_HAL_Driver/Src/subdir.mk
@@ -83,8 +84,8 @@ all: main-build
 main-build: Weather_Station_V1.elf secondary-outputs
 
 # Tool invocations
-Weather_Station_V1.elf Weather_Station_V1.map: $(OBJS) $(USER_OBJS) /home/hamza/STM32CubeIDE/workspace_1.19.0/Weather_Station_V3_FIX/Weather_Station_V1/STM32F746NGHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Weather_Station_V1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/hamza/STM32CubeIDE/workspace_1.19.0/Weather_Station_V3_FIX/Weather_Station_V1/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Weather_Station_V1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Weather_Station_V1.elf Weather_Station_V1.map: $(OBJS) $(USER_OBJS) /home/hamza/Downloads/Weather_Station_V8_fix_warning/Weather_Station_V1/STM32F746NGHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Weather_Station_V1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/hamza/Downloads/Weather_Station_V8_fix_warning/Weather_Station_V1/STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Weather_Station_V1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
