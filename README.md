@@ -45,7 +45,7 @@ This project highlights competencies in:
 | Rainfall                 | Tipping Bucket Gauge      | GPIO Counter     |
 
 
-<h2 align="center">sparkfun weather meter kit and the carte X-NUCLEO-IKS01A3</h2>
+<h2 align="center">Hardware Components</h2>
 
 <p align="center">
   <img src="X-NUCLEO-IKS01A3.png" width="350"/>
@@ -57,7 +57,7 @@ This project highlights competencies in:
   <em>
   Left: X-NUCLEO-IKS01A3 Environmental Sensor Expansion Board  
   &nbsp;&nbsp; | &nbsp;&nbsp;  
-  Right: External Weather Sensors (Anemometer, Wind Vane & Rain Gauge)
+  Right: Sparkfun weather meter kit (Anemometer, Wind Vane & Rain Gauge)
   </em>
 </p>
 
