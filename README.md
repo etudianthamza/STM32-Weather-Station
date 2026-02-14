@@ -83,11 +83,22 @@ This project highlights competencies in:
 ---
 
 ## 📊 Features
+### 🌍 Real-Time Monitoring
+- Temperature (°C)
+- Humidity (%RH)
+- Pressure (hPa)
+- Wind speed (km/h)
+- Wind direction (°)
+- Rainfall (mm)
 
-- Real-time sensor monitoring
-- 60-minute historical graph display
-- CSV data logging
-- Automatic screen sleep/wake
+### 📈 Data Visualization
+- Historical graphs (last 60 minutes)
+- Trend analysis
+- Touch-based navigation
+
+### ⚡ Power Optimization
+- Automatic screen sleep after inactivity
+- Touch-based wake-up
 
 ---
 
