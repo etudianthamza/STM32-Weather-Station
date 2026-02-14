@@ -1,2 +1,2 @@
-# Weather Station - STM32F746G Discovery
+# 🌦️ STM32 Weather Station – Embedded Environmental Monitoring System
 # # Description du Projet
