@@ -71,12 +71,13 @@ This project highlights competencies in:
 
 - Embedded C
 - STM32 HAL Drivers
-- I2C Communication
-- GPIO Interrupts
-- ADC Sampling
-- RTC Timekeeping
-- FatFs File System
-- Custom Touchscreen GUI
+- CMSIS
+- I2C communication protocol
+- GPIO interrupt-based pulse counting
+- ADC sampling & calibration
+- RTC time stamping
+- Custom touchscreen graphical interface
+- Real-time graph plotting (60-min history buffer)
 
 ---
 
