@@ -19,10 +19,25 @@ This project highlights competencies in:
 
 ## 🎯 Objectives
 
-- Real-time environmental monitoring
+- Monitor local atmospheric conditions in real time
 - Sensor interfacing (I2C, ADC, GPIO)
 - Touchscreen graphical interface
 - Modular embedded firmware architecture
+- Implement energy-efficient screen management
+
+---
+
+## 🧠 System Architecture
+### 🔧 Main Board
+- STM32F746G-DISCOVERY
+
+- - MCU: STM32F746NGH6 (ARM Cortex-M7 @ 216 MHz)
+
+4.3” TFT LCD (480x272)
+
+Capacitive touch panel
+
+Integrated microSD support
 
 ---
 
@@ -37,6 +52,7 @@ This project highlights competencies in:
 <p align="center">
   <img src="weather_sensors.png" width="600"/>
 </p>
+
 ---
 
 ## 💻 Software & Technologies
