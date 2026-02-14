@@ -102,6 +102,24 @@ This project highlights competencies in:
 
 ---
 
+## 📂 Project Structure
+weather-station-stm32/
+├── Core/
+│   ├── Inc/
+│   └── Src/
+├── Drivers/
+│   ├── HAL
+│   ├── CMSIS
+│   └── BSP
+├── Middlewares/
+│   └── FatFs/
+├── Documentation/
+│   ├── Images/
+│   └── Schematics/
+└── README.md
+
+---
+
 ## 🚀 Getting Started
 
 ### Requirements
