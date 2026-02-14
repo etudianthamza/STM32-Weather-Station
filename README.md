@@ -74,10 +74,11 @@ This project highlights competencies in:
 - CMSIS
 - I2C communication protocol
 - GPIO interrupt-based pulse counting
+- Timers
 - ADC sampling & calibration
 - RTC time stamping
 - Custom touchscreen graphical interface
-- Real-time graph plotting (60-min history buffer)
+- Real-time graph plotting (60-seconde history buffer)
 
 ---
 
