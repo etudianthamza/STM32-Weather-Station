@@ -113,6 +113,25 @@ This project highlights competencies in:
 ```bash
 git clone https://github.com/etudianthamza/STM32-Weather-Station.git
 cd STM32-Weather-Station
-```bash
-cerver
+```
+1- Open project in STM32CubeIDE
+2- Build project
+3- Connect board via USB
+4- Flash using Debug mode
+
+### 📸 Demonstration
+<p align="center">
+  <img src="Main dashboard view.jpeg" width="280"/>
+  &nbsp;&nbsp;&nbsp;
+  <img src="Real-time graphs.jpeg" width="280"/>
+</p>
+
+<p align="center">
+  <em>
+  Left: Detailed measurement page
+  &nbsp;&nbsp; | &nbsp;&nbsp;  
+  Right: Real-time graphs
+  </em>
+
+
 
