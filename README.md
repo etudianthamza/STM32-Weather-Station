@@ -48,9 +48,9 @@ This project highlights competencies in:
 <h2 align="center">sparkfun weather meter kit and the carte X-NUCLEO-IKS01A3</h2>
 
 <p align="center">
-  <img src="images/X-NUCLEO-IKS01A3.png" width="350"/>
+  <img src="X-NUCLEO-IKS01A3.png" width="350"/>
   &nbsp;&nbsp;&nbsp;
-  <img src="images/weather_sensors.png" width="350"/>
+  <img src="weather_sensors.png" width="350"/>
 </p>
 
 <p align="center">
