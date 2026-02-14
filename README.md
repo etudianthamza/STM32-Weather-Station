@@ -48,20 +48,22 @@ This project highlights competencies in:
 <h2 align="center">Hardware Components</h2>
 
 <p align="center">
-  <img src="X-NUCLEO-IKS01A3.png" width="350"/>
+  <img src="STM32F746G-Discovery.png" width="280"/>
   &nbsp;&nbsp;&nbsp;
-  <img src="weather_sensors.png" width="350"/>
+  <img src="X-NUCLEO-IKS01A3.png" width="280"/>
+  &nbsp;&nbsp;&nbsp;
+  <img src="weather_sensors.png" width="280"/>
 </p>
 
 <p align="center">
   <em>
-  Left: X-NUCLEO-IKS01A3 Environmental Sensor Expansion Board  
+  Left: STM32F746G-Discovery Development Board  
   &nbsp;&nbsp; | &nbsp;&nbsp;  
-  Right: Sparkfun weather meter kit (Anemometer, Wind Vane & Rain Gauge)
+  Center: X-NUCLEO-IKS01A3 Environmental Sensor Expansion Board  
+  &nbsp;&nbsp; | &nbsp;&nbsp;  
+  Right: SparkFun Weather Meter Kit (Anemometer, Wind Vane & Rain Gauge)
   </em>
 </p>
-
-
 
 ---
 
