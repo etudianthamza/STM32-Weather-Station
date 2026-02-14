@@ -34,7 +34,6 @@ This project highlights competencies in:
 - Anemometer (Wind Speed)
 - Wind Vane (Direction)
 - Tipping Bucket Rain Gauge
-![Main Screen](Anemometer (Wind Speed, Wind Vane (Direction) and Tipping Bucket Rain Gauge.png]
 ---
 
 ## 💻 Software & Technologies
