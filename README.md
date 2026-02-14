@@ -1,10 +1,21 @@
 # 🌦️ Embedded Weather Station Based on STM32F746G-Discovery
 ## 📌 Project Overview
-## 📌 Project Overview
 
-This project implements a fully embedded environmental monitoring system using the STM32F746G-Discovery board.
+This project is a fully embedded weather monitoring system developed using the STM32F746G-DISCOVERY board and X-NUCLEO-IKS01A3.
 
-The system collects real-time environmental data (temperature, humidity, pressure, wind, rainfall), processes the measurements using STM32 peripherals, displays them on a touchscreen interface, and logs historical data to a microSD card.
+The system acquires real-time environmental data from multiple sensors on X-NUCLEO-IKS01A3, processes the measurements using STM32 peripherals, and displays them on an interactive touchscreen interface.
+
+This project highlights competencies in:
+
+- Embedded firmware development
+
+- Sensor interfacing (I2C, ADC, GPIO interrupts)
+
+- Real-time data acquisition
+
+- GUI design for embedded systems
+
+- Data logging with FAT file system
 
 ---
 
