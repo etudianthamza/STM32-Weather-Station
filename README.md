@@ -34,7 +34,7 @@ This project highlights competencies in:
 - Anemometer (Wind Speed)
 - Wind Vane (Direction)
 - Tipping Bucket Rain Gauge
-![Weather Sensors](images/weather_sensors.png)
+![weather_sensors](weather_sensors.png)
 ---
 
 ## 💻 Software & Technologies
