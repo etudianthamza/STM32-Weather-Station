@@ -35,6 +35,9 @@ This project highlights competencies in:
 - Wind Vane (Direction)
 - Tipping Bucket Rain Gauge
 ![weather_sensors](weather_sensors.png)
+<p align="center">
+  <img src="weather_sensors.png" width="600"/>
+</p>
 ---
 
 ## 💻 Software & Technologies
