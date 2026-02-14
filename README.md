@@ -57,11 +57,11 @@ This project highlights competencies in:
 
 <p align="center">
   <em>
-  Left: STM32F746G-Discovery Development Board  
+  Left: STM32F746G-Discovery
   &nbsp;&nbsp; | &nbsp;&nbsp;  
-  Center: X-NUCLEO-IKS01A3 Environmental Sensor Expansion Board  
+  Center: X-NUCLEO-IKS01A3 Environmental Sensor
   &nbsp;&nbsp; | &nbsp;&nbsp;  
-  Right: SparkFun Weather Meter Kit (Anemometer, Wind Vane & Rain Gauge)
+  Right: SparkFun Weather Meter Kit
   </em>
 </p>
 
