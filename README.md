@@ -102,22 +102,6 @@ This project highlights competencies in:
 
 ---
 
-## 📂 Project Structure
-
-```bash
-weather-station-stm32/
-├── Core/
-│   ├── Inc/                # Header files
-│   └── Src/                # Application source files
-├── Drivers/
-│   ├── HAL/                # STM32 HAL drivers
-│   ├── CMSIS/              # ARM CMSIS layer
-│   └── BSP/                # Board Support Package
-└── README.md
-```
-
----
-
 ## 🚀 Getting Started
 
 ### Requirements
@@ -127,4 +111,8 @@ weather-station-stm32/
 ### Installation
 
 ```bash
-git clone https://github.com/yourusername/yourrepo.git
+git clone https://github.com/etudianthamza/STM32-Weather-Station.git
+cd STM32-Weather-Station
+```bash
+cerver
+
