@@ -114,10 +114,10 @@ This project highlights competencies in:
 git clone https://github.com/etudianthamza/STM32-Weather-Station.git
 cd STM32-Weather-Station
 ```
-1- Open project in STM32CubeIDE
-2- Build project
-3- Connect board via USB
-4- Flash using Debug mode
+1. Open the project in **STM32CubeIDE**
+2. Build the project
+3. Connect the board via USB
+4. Flash the firmware using Debug mode
 
 ### 📸 Demonstration
 <p align="center">
