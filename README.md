@@ -1,2 +1,2 @@
-# 🌦️ STM32 Weather Station – Embedded Environmental Monitoring System
-# # Description du Projet
+# 🌦️ Embedded Weather Station Based on STM32F746G-Discovery
+📌 Project Overview
