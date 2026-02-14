@@ -30,8 +30,8 @@ This project highlights competencies in:
 ## 🧠 System Architecture
 ### 🔧 Main Board
 - STM32F746G-DISCOVERY
-- - MCU: STM32F746NGH6 (ARM Cortex-M7 @ 216 MHz)
-- - 4.3” TFT LCD (480x272)
+  - MCU: STM32F746NGH6 (ARM Cortex-M7 @ 216 MHz)
+  - 4.3” TFT LCD (480x272)
  - Capacitive touch panel
  - Integrated microSD support
 
