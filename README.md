@@ -15,8 +15,6 @@ This project highlights competencies in:
 
 - GUI design for embedded systems
 
-- Data logging with FAT file system
-
 ---
 
 ## 🎯 Objectives
@@ -24,7 +22,6 @@ This project highlights competencies in:
 - Real-time environmental monitoring
 - Sensor interfacing (I2C, ADC, GPIO)
 - Touchscreen graphical interface
-- Data logging on microSD
 - Modular embedded firmware architecture
 
 ---
@@ -37,7 +34,6 @@ This project highlights competencies in:
 - Anemometer (Wind Speed)
 - Wind Vane (Direction)
 - Tipping Bucket Rain Gauge
-- microSD Card
 
 ---
 
