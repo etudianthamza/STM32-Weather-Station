@@ -44,10 +44,23 @@ This project highlights competencies in:
 | Wind Direction           | 16-position Wind Vane     | ADC              |
 | Rainfall                 | Tipping Bucket Gauge      | GPIO Counter     |
 
-The sparkfun weather meter kit and the carte X-NUCLEO-IKS01A3
+
+<h2 align="center">sparkfun weather meter kit and the carte X-NUCLEO-IKS01A3</h2>
+
 <p align="center">
-  <img src="weather_sensors.png" width="600"/>
+  <img src="images/X-NUCLEO-IKS01A3.png" width="350"/>
+  &nbsp;&nbsp;&nbsp;
+  <img src="images/weather_sensors.png" width="350"/>
 </p>
+
+<p align="center">
+  <em>
+  Left: X-NUCLEO-IKS01A3 Environmental Sensor Expansion Board  
+  &nbsp;&nbsp; | &nbsp;&nbsp;  
+  Right: External Weather Sensors (Anemometer, Wind Vane & Rain Gauge)
+  </em>
+</p>
+
 
 
 ---
