@@ -32,8 +32,18 @@ This project highlights competencies in:
 - STM32F746G-DISCOVERY
   - MCU: STM32F746NGH6 (ARM Cortex-M7 @ 216 MHz)
   - 4.3” TFT LCD (480x272)
- - Capacitive touch panel
- - Integrated microSD support
+  - Capacitive touch panel
+  - Integrated microSD support
+### 🌡️ Environmental Sensors
+## Environmental Sensors
+
+| Measurement              | Sensor                    | Interface        |
+|--------------------------|---------------------------|------------------|
+| Temperature & Humidity   | HTS221                    | I2C              |
+| Barometric Pressure      | LPS22HH                   | I2C              |
+| Wind Speed               | Cup Anemometer            | GPIO Interrupt   |
+| Wind Direction           | 16-position Wind Vane     | ADC              |
+| Rainfall                 | Tipping Bucket Gauge      | GPIO Counter     |
 
 ---
 
