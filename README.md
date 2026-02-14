@@ -103,20 +103,23 @@ This project highlights competencies in:
 ---
 
 ## 📂 Project Structure
+
+```bash
 weather-station-stm32/
 ├── Core/
-│   ├── Inc/
-│   └── Src/
+│   ├── Inc/                # Header files
+│   └── Src/                # Application source files
 ├── Drivers/
-│   ├── HAL
-│   ├── CMSIS
-│   └── BSP
+│   ├── HAL/                # STM32 HAL drivers
+│   ├── CMSIS/              # ARM CMSIS layer
+│   └── BSP/                # Board Support Package
 ├── Middlewares/
-│   └── FatFs/
+│   └── FatFs/              # SD card file system
 ├── Documentation/
-│   ├── Images/
-│   └── Schematics/
+│   ├── Images/             # Project images
+│   └── Schematics/         # Hardware schematics
 └── README.md
+```
 
 ---
 
