@@ -35,7 +35,6 @@ This project highlights competencies in:
   - Capacitive touch panel
   - Integrated microSD support
 ### 🌡️ Environmental Sensors
-## Environmental Sensors
 
 | Measurement              | Sensor                    | Interface        |
 |--------------------------|---------------------------|------------------|
@@ -45,19 +44,11 @@ This project highlights competencies in:
 | Wind Direction           | 16-position Wind Vane     | ADC              |
 | Rainfall                 | Tipping Bucket Gauge      | GPIO Counter     |
 
----
-
-## 🔧 Hardware
-
-- STM32F746G-Discovery (ARM Cortex-M7)
-- HTS221 (Temperature & Humidity)
-- LPS22HH (Pressure)
-- Anemometer (Wind Speed)
-- Wind Vane (Direction)
-- Tipping Bucket Rain Gauge
+The sparkfun weather meter kit and the carte X-NUCLEO-IKS01A3
 <p align="center">
   <img src="weather_sensors.png" width="600"/>
 </p>
+
 
 ---
 
