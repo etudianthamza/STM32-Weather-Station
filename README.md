@@ -113,11 +113,6 @@ weather-station-stm32/
 │   ├── HAL/                # STM32 HAL drivers
 │   ├── CMSIS/              # ARM CMSIS layer
 │   └── BSP/                # Board Support Package
-├── Middlewares/
-│   └── FatFs/              # SD card file system
-├── Documentation/
-│   ├── Images/             # Project images
-│   └── Schematics/         # Hardware schematics
 └── README.md
 ```
 
