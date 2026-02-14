@@ -59,9 +59,9 @@ This project highlights competencies in:
   <em>
   Left: STM32F746G-Discovery
   &nbsp;&nbsp; | &nbsp;&nbsp;  
-  Center: X-NUCLEO-IKS01A3 Environmental Sensor
+  Right: X-NUCLEO-IKS01A3 Environmental Sensor
   &nbsp;&nbsp; | &nbsp;&nbsp;  
-  Right: SparkFun Weather Meter Kit
+  Center: SparkFun Weather Meter Kit
   </em>
 </p>
 
