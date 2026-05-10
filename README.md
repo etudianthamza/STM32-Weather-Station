@@ -1,4 +1,21 @@
 # 🌦️ Embedded Weather Station Based on STM32F746G-Discovery
+
+### 📸 Demonstration
+<p align="center">
+  <img src="Main dashboard view.jpeg" width="280"/>
+  &nbsp;&nbsp;&nbsp;
+  <img src="Real-time graphs.jpeg" width="280"/>
+</p>
+
+<p align="center">
+  <em>
+  Left: Detailed measurement page
+  &nbsp;&nbsp; | &nbsp;&nbsp;  
+  Right: Real-time graphs
+  </em>
+
+---
+  
 ## 📌 Project Overview
 
 This project is a fully embedded weather monitoring system developed using the STM32F746G-DISCOVERY board and X-NUCLEO-IKS01A3.
@@ -118,20 +135,3 @@ cd STM32-Weather-Station
 2. Build the project
 3. Connect the board via USB
 4. Flash the firmware using Debug mode
-
-### 📸 Demonstration
-<p align="center">
-  <img src="Main dashboard view.jpeg" width="280"/>
-  &nbsp;&nbsp;&nbsp;
-  <img src="Real-time graphs.jpeg" width="280"/>
-</p>
-
-<p align="center">
-  <em>
-  Left: Detailed measurement page
-  &nbsp;&nbsp; | &nbsp;&nbsp;  
-  Right: Real-time graphs
-  </em>
-
-
-
